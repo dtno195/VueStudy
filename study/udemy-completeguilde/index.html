@@ -16,6 +16,10 @@
         <h1 v-once>{{title}}</h1>
         <p>{{sayHello()}} - <a v-bind:href="link">Google</a></p>
     </div>
+    <hr>
+    <p v-html="finishedLink"></p>
+    
+    
 </body>
 <script>
     new Vue({
@@ -23,6 +27,8 @@
         data:{
             title:'Hello',
             link:'http://google.com',
+            finishedLink:'<a href="http://google.com">Gooogle</a>',
+
         },
         methods:{
             sayHello:function(){
