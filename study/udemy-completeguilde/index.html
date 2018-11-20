@@ -32,8 +32,8 @@
                 <td><button class="btn btn-info" v-on:click="decre">Giảm</button></td>
             </tr>
         </table>
-        <p>{{ counter }}</p>
-        <p>{{ counter > 10 ? 'Great than 10 ' : 'Small than 10 ' }}</p>
+        <p>Counter : {{ counter }}</p>
+        <p>Result : {{ result }}</p>
         <hr>
         <p v-on:mousemove="coordinate">
             Coordinates : {{x}} / {{y}}
@@ -44,6 +44,7 @@
         <h5>2 way binding</h5>
         <input type="text" name="" id="" v-model="name">
         {{ name}}
+        <h5>watch ==>> after 2 s counter=0</h5>
     </div>
 </body>
 <script>
@@ -56,15 +57,26 @@
             counter: 0,
             x: 0,
             y: 0,
-            name : 'simple',
+            name: 'simple',
+            result: '',
         },
+        watch: {
+            counter:function(value){
+                var vm = this;
+                setTimeout(function(){
+                    vm.counter=0;
+                },2000)
+            }
+        },
+
         methods: {
             sayHello: function () {
                 this.title = 's1mple';
                 return this.title;
             },
             incre: function (step) {
-                this.counter+= step;
+                this.counter += step;
+                this.result = this.counter > 10 ? 'Great than 10 ' : 'Small than 10 ';
             },
             decre: function () {
                 if (this.counter == 0) {
@@ -74,11 +86,11 @@
                 }
 
             },
-            coordinate: function(event){
+            coordinate: function (event) {
                 this.x = event.clientX;
                 this.y = event.clientY;
             },
-            alertMe: function(){
+            alertMe: function () {
                 alert("ducnt")
             }
 
