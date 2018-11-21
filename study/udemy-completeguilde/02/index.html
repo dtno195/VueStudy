@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -15,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-    <script src="./vue.js"></script>
+    <script src="../vue.js"></script>
 </head>
 
 <body>
@@ -40,11 +41,29 @@
             - <span v-on:mousemove.stop>DEAD SPOT</span>
         </p>
         <h5>v-onkeyup</h5>
-        <input type="text" v-on:keyup.enter.space="alertMe">
+        <input type="text" v-on:keyup.enter.space="alertMe"> space or enter if you want finish
+        <hr>
         <h5>2 way binding</h5>
         <input type="text" name="" id="" v-model="name">
         {{ name}}
+        <hr>
         <h5>watch ==>> after 2 s counter=0</h5>
+        <hr>
+        <h5>Dynamic css</h5>
+        <div class="demo" v-on:click="attackRed = !attackRed" :class="divClassCpt">Click thử</div>
+        <div class="demo" :class="{red:attackRed}">.</div>
+        <div class="demo" :class="[color,{red: attackRed}]">Div 3</div>
+        <br>
+        <input type="text" v-model="color">red green blue or none =>> 2 way binding in div 3
+        <hr>
+        <h5>Setting styles dynamic without class</h5>
+        <div class="demo" :style="{backgroundColor: color}"></div>
+        <div class="demo" :style="myStyle"></div>
+        <div class="demo" :style="[myStyle,{height: width+'px'}]"></div>
+        <br>
+        <p> 2way binding color and width</p>
+        <input type="text" v-model="color">
+        <input type="text" v-model="width">
     </div>
 </body>
 <script>
@@ -59,13 +78,16 @@
             y: 0,
             name: 'simple',
             result: '',
+            attackRed: false,
+            color: 'green',
+            width: 100,
         },
         watch: {
-            counter:function(value){
+            counter: function (value) {
                 var vm = this;
-                setTimeout(function(){
-                    vm.counter=0;
-                },2000)
+                setTimeout(function () {
+                    vm.counter = 0;
+                }, 2000)
             }
         },
 
@@ -94,6 +116,20 @@
                 alert("ducnt")
             }
 
+        },
+        computed: {
+            divClassCpt: function () {
+                return {
+                    red: this.attackRed,
+                    blue: !this.attackRed
+                }
+            },
+            myStyle: function () {
+                return {
+                    backgroundColor: this.color,
+                    width: this.width + 'px'
+                }
+            }
         }
     });
 </script>
