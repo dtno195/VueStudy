@@ -28,8 +28,8 @@
                 <h1 class="text-center">YOU - <img src="./img/knight.png" alt=""></h1>
 
                 <div class="healthbar">
-                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-
+                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width:playerHeath+'%'}">
+                        {{playerHeath}}
                     </div>
                 </div>
             </div>
@@ -37,30 +37,30 @@
 
                 <h1 class="text-center">MONSTER - <img src="./img/monster.png" alt=""></h1>
                 <div class="healthbar">
-                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
-
+                    <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width:monsterHeath+'%'}">
+                        {{monsterHeath}}
                     </div>
                 </div>
             </div>
         </section>
-        <section class="row controls">
+        <section class="row controls" v-if="!gameIsRunning">
             <div class="small-12 columns">
-                <button id="start-game" class="btn btn-primary">START NEW GAME</button>
+                <button id="start-game" class="btn btn-primary" @click="startGame">START NEW GAME</button>
             </div>
         </section>
-        <section class="row controls">
+        <section class="row controls" v-else>
             <div class="small-12 columns">
-                <button id="attack" class="btn btn-danger">ATTACK</button>
-                <button id="special-attack" class="btn btn-warning">SPECIAL ATTACK</button>
-                <button id="heal" class="btn btn-primary">HEAL</button>
-                <button id="give-up" class="btn">GIVE UP</button>
+                <button id="attack" class="btn btn-danger" @click="attack">ATTACK</button>
+                <button id="special-attack" class="btn btn-warning" @click="specialAttack">SPECIAL ATTACK</button>
+                <button id="heal" class="btn btn-primary" @click="heal">HEAL</button>
+                <button id="give-up" class="btn btn-dark" @click="giveUp">GIVE UP</button>
             </div>
         </section>
-        <section class="row log">
+        <section class="row log" v-if="turns.length>0">
             <div class="small-12 columns">
                 <ul>
-                    <li>
-
+                    <li v-for="turn in turns" :class="{'player-turn': turn.isPlayer,'monster-turn': !turn.isPlayer}">
+                        {{turn.text}}
                     </li>
                 </ul>
             </div>
