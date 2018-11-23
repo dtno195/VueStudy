@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <h1 ref="heading">{{ title }}</h1>
+        <button v-on:click="show" ref="myButton">Show Paragraph</button>
+        <p v-if="showParagraph">This is not always visible</p>
+    </div>
+    <div id="app2">
+        <h1 ref="heading">{{ title }}</h1>
+        <button @click="onChange">Change something in vue 1</button>
+    </div>
+</body>
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            title: 'Simple D is the best',
+            showParagraph: true,
+        },
+        methods: {
+            show: function () {
+                this.showParagraph = true;
+                this.updateTitle('Super D');
+                console.log(this.$refs)
+            },
+            updateTitle: function (title) {
+                this.title = title;
+            }
+        },
+        computed: {
+            lowercaseTitle: function () {
+                return this.title.toLowerCase();
+            }
+        },
+        watch: {
+            title: function (value) {
+                alert('1 ngay van the van troi qua du 24h : ' + value)
+            }
+        } 
+    });
+    console.log(vm1);
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            title: 'D',
+            showParagraph: true,
+        },
+        methods: {
+            onChange: function () {
+                vm1.title = 'Changed!';
+            }
+        }
+
+    });
+</script>
+<style>
+    #app {
+        margin-left: 50px
+    }
+</style>
+
+</html>
