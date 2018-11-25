@@ -29,10 +29,12 @@
         <h1 ref="heading">{{ title }}</h1>
         <button @click="onChange">Change something in vue 1</button>
     </div>
+    <div id="app3">
+
+    </div>
 </body>
 <script>
     var vm1 = new Vue({
-        el: '#app1',
         data: {
             title: 'Simple D is the best',
             showParagraph: true,
@@ -41,7 +43,7 @@
             show: function () {
                 this.showParagraph = true;
                 this.updateTitle('Super D');
-                console.log(this.$refs)
+                this.$refs.myButton.innerText = "test";
             },
             updateTitle: function (title) {
                 this.title = title;
@@ -59,6 +61,8 @@
         } 
     });
     console.log(vm1);
+    vm1.$mount('#app1');
+    vm1.$refs.heading.innerText='something else';
     var vm2 = new Vue({
         el: '#app2',
         data: {
@@ -72,6 +76,11 @@
         }
 
     });
+    var vm3 = new Vue({
+        template:'<h1>Hello!</h1>'
+    })
+    vm3.$mount();
+    document.getElementById('app3').appendChild(vm3.$el);
 </script>
 <style>
     #app {
