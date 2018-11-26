@@ -24,17 +24,21 @@
         <h1 ref="heading">{{ title }}</h1>
         <button v-on:click="show" ref="myButton">Show Paragraph</button>
         <p v-if="showParagraph">This is not always visible</p>
+        
     </div>
     <div id="app2">
         <h1 ref="heading">{{ title }}</h1>
         <button @click="onChange">Change something in vue 1</button>
     </div>
-    <div id="app3">
-
-    </div>
+    <div class="hello123"></div>
+    <hello></hello>
+    
+</div>
+    
 </body>
 <script>
     var vm1 = new Vue({
+        el: '#app1',
         data: {
             title: 'Simple D is the best',
             showParagraph: true,
@@ -43,7 +47,7 @@
             show: function () {
                 this.showParagraph = true;
                 this.updateTitle('Super D');
-                this.$refs.myButton.innerText = "test";
+
             },
             updateTitle: function (title) {
                 this.title = title;
@@ -61,8 +65,6 @@
         } 
     });
     console.log(vm1);
-    vm1.$mount('#app1');
-    vm1.$refs.heading.innerText='something else';
     var vm2 = new Vue({
         el: '#app2',
         data: {
@@ -77,10 +79,13 @@
 
     });
     var vm3 = new Vue({
-        template:'<h1>Hello!</h1>'
+        el:'.hello123',
+        template:'<h1>Hello D </h1>'
     })
-    vm3.$mount();
-    document.getElementById('app3').appendChild(vm3.$el);
+    Vue.component('hello',{
+        template:'<h1>Simple BEST</h1>'
+    });
+   
 </script>
 <style>
     #app {
