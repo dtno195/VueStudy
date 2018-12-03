@@ -7,6 +7,15 @@ import Home from './Home.vue'
 Vue.config.productionTip = false
 Vue.component('app-server', Home)
 /* eslint-disable no-new */
+
+export const eventBus = new Vue({
+  methods:{
+    chagneAge(age){
+      this.$emit('ageWasEdited',age)
+    }
+  }
+});
+
 new Vue({
   el: '#app',
   router,
@@ -15,3 +24,5 @@ new Vue({
   },
   template: '<App/>'
 })
+
+
