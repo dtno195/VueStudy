@@ -5,11 +5,21 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <appQuoute>
-            <h2>The Quote</h2>
-            <p>A wonderful Quote</p>
+          <button @click="selectedComponent='appQuote'">Quote</button>
+          <button @click="selectedComponent='appAuthor'">Author</button>
+          <button @click="selectedComponent='appNew'">New</button>
+          <h2>{{selectedComponent}}</h2>
+          <hr>
+          <keep-alive>
+            <component :is="selectedComponent">
+              <p>Default Content</p>
+            </component>
+          </keep-alive>
+          <!-- <appQuoute>
+            <h2 slot="title">{{quoteTitle}}</h2>
+            <p >A wonderful Quote</p>
           </appQuoute>
-          
+          <app-author></app-author> -->
         </div>
       </div>
     </div>
@@ -19,11 +29,21 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import Quoute from "./components/Quote";
+import Author from "./components/Author";
+import New from "./components/New";
 
 export default {
   name: "app",
+  data:function(){
+    return{
+      quoteTitle : 'The Simple',
+      selectedComponent:'appQuote',
+    }
+  },
   components: {
-    appQuoute: Quoute
+    appQuoute: Quoute,
+    appAuthor : Author,
+    appNew : New,
   }
 };
 </script>
