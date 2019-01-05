@@ -21,7 +21,7 @@ export default {
     // },
     methods: {
         navigateHome(){
-            this.$router.push('/')
+            this.$router.push({name:'home'})
         }
     },
 }
