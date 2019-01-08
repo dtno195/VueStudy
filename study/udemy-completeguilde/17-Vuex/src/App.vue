@@ -1,47 +1,28 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-    <template>
-      <v-container grid-list-xl>
-        <v-layout wrap>
-          <v-flex v-for="elevation in elevations" :key="elevation" xs12 md4>
-            <v-sheet class="pa-5" color="grey lighten-3">
-              <v-sheet :elevation="elevation" class="mx-auto" height="100" width="100"></v-sheet>
-            </v-sheet>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </template>
-  </v-app>
-</template>
-  </v-app>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h1>Vuex</h1>
+        <app-result :counter="counter"></app-result>
+        <hr>
+        <app-coutenter @updated="counter+=$event"></app-coutenter>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
+import Counter from './components/Counter'
+import Result from './components/Result'
 export default {
-  name: "App",
-  components: {
-    HelloWorld
-  },
   data() {
     return {
-      //
+      counter:0
     };
+  },
+  components: {
+    appCoutenter : Counter,
+    appResult : Result
   }
 };
 </script>
